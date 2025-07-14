@@ -80,7 +80,7 @@ class TestGIsHappy(unittest.TestCase):
     
     def test_g_is_happy_test3(self):
         actual = self.strings_and_things.g_is_happy("xxggyygxx")
-        self.assertTrue(actual)
+        self.assertFalse(actual)
 
 
 class TestRemoveString(unittest.TestCase):

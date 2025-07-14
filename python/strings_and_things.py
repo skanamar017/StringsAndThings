@@ -12,7 +12,12 @@ class StringsAndThings:
                   count_yz("day fez"); // Should return 2
                   count_yz("day fyyyz"); // Should return 2
         """
-        return None
+        count=0
+        for word in input_str.split():
+            if word[-1] in "yz":
+                count+=1
+
+        return count
 
     def remove_string(self, base, remove):
         """
@@ -24,7 +29,8 @@ class StringsAndThings:
                   remove_string("Hello there", "e") //  Should return "Hllo thr"
                   remove_string("Hello there", "x") // Should return "Hello there"
         """
-        return None
+        
+        return base.replace(remove, "")
 
     def contains_equal_number_of_is_and_not(self, input_str):
         """
@@ -35,7 +41,17 @@ class StringsAndThings:
                   contains_equal_number_of_is_and_not("This is notnot") // Should return true
                   contains_equal_number_of_is_and_not("noisxxnotyynotxisi") // Should return true
         """
-        return None
+        is_count=0
+        for i in range(len(input_str)-1):
+            if input_str[i:i+2]=="is":
+                is_count+=1
+        
+        not_count=0
+        for i in range(len(input_str)-2):
+            if input_str[i:i+3]=="not":
+                not_count+=1
+    
+        return is_count==not_count
 
     def g_is_happy(self, input_str):
         """
@@ -45,7 +61,28 @@ class StringsAndThings:
                   g_is_happy("xxgxx") // Should return  false
                   g_is_happy("xxggyygxx") // Should return  false
         """
-        return None
+        is_happy=False
+        for i in range(len(input_str)):
+            if i==0:
+                if input_str[i]=="g" and input_str[i+1]=="g":
+                    is_happy=True
+                elif input_str[i]=="g" and input_str[i+1]!="g":
+                    is_happy= False
+                    break
+            elif i in range(1, len(input_str)-1):
+                if input_str[i]=="g" and (input_str[i+1]=="g" or input_str[i-1]=="g"):
+                    is_happy=True
+                elif input_str[i]=="g" and (input_str[i+1]!="g" and input_str[i-1]!="g"):
+                    is_happy= False
+                    break
+            elif i==len(input_str)-1:
+                if input_str[i]=="g" and input_str[i-1]=="g":
+                    is_happy=True
+                elif input_str[i]=="g" and input_str[i-1]!="g":
+                    is_happy= False
+                    break
+
+        return is_happy
 
     def count_triple(self, input_str):
         """
@@ -55,4 +92,10 @@ class StringsAndThings:
                    count_triple("xxxabyyyycd") // Should return 3
                    count_triple("a") // Should return 0
         """
-        return None
+        if len(input_str)<3:
+            return 0
+        count=0
+        for i in range(len(input_str)-2):
+            if len(set(input_str[i:i+3]))==1:
+                count+=1
+        return count
